@@ -1,10 +1,4 @@
-﻿//-------------------------------------------------------------------------
-// <copyright file="Program.cs" company="Universidad Católica del Uruguay">
-// Copyright (c) Programación II. Derechos reservados.
-// </copyright>
-//-------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
 using Full_GRASP_And_SOLID.Library;
@@ -26,9 +20,13 @@ namespace Full_GRASP_And_SOLID
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
 
-            AllInOnePrinter printer = new AllInOnePrinter();
-            printer.PrintRecipe(recipe, Destination.Console);
-            printer.PrintRecipe(recipe, Destination.File);
+            // Crear una instancia de AllInOnePrinter con ConsolePrinter
+            AllInOnePrinter consolePrinter = new AllInOnePrinter(new ConsolePrinter());
+            consolePrinter.PrintRecipe(recipe);
+
+            // Crear una instancia de AllInOnePrinter con FilePrinter
+            AllInOnePrinter filePrinter = new AllInOnePrinter(new FilePrinter("Recipe.txt"));
+            filePrinter.PrintRecipe(recipe);
         }
 
         private static void PopulateCatalogs()
@@ -74,3 +72,4 @@ namespace Full_GRASP_And_SOLID
         }
     }
 }
+
